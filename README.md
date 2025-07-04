@@ -64,8 +64,6 @@
 
 ```
 <script src="https://gcore.jsdelivr.net/gh/SajunaOo/AList-Moe@v1.13-beta.3/js/AList-Moe.min.js"></script>
-<div id="beian-container" hidden>
-<a href="https://beian.miit.gov.cn" target="_blank" rel="noopener" class="beian-link "><i class="fa-solid fa-shield-check"></i>豫 ICP 备 2024044702 号</a></div>
 
 <div id="beian-container" hidden>
   <a href="https://beian.miit.gov.cn" target="_blank" rel="noopener" class="beian-link ">
