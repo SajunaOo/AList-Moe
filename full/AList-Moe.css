@@ -1,5 +1,5 @@
 /*
- * AList-Moe v1.13-beta.4 - 202507051830
+ * AList-Moe v1.13-beta.4 - 202507051926
  * Repository: https://github.com/SajunaOo/AList-Moe
  * Author: 朱茱 (https://www.isajuna.com)
  * (C) 2025 朱茱 - AGPL-3.0 Licensed
@@ -997,7 +997,7 @@ section.hope-popover__content {
 /* 存储驱动筛选标签毛玻璃 */
 span.hope-select__tag {
   background-color: rgba(var(--mio-color-main), var(--mio-opacity-05));
-border-color: unset;
+  border-color: transparent;
 }
 
 /* 存储卡片布局毛玻璃 */
