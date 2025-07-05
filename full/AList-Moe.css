@@ -1,5 +1,5 @@
 /*
- * AList-Moe v1.13-beta.3 - 202507042106
+ * AList-Moe v1.13-beta.4 - 202507051830
  * Repository: https://github.com/SajunaOo/AList-Moe
  * Author: 朱茱 (https://www.isajuna.com)
  * (C) 2025 朱茱 - AGPL-3.0 Licensed
@@ -88,19 +88,26 @@ body {
 }
 
 /* 头部搜索框毛玻璃 */
-.hope-c-PJLV-ikCuBvM-css{
+.header-right > div {
   backdrop-filter: blur(10px);
 }
 
 /* 头部搜索框悬停半透明 */
-div.hope-c-PJLV-ikCuBvM-css:hover,
-div.hope-c-PJLV-ikCuBvM-css[data-hover] {
+.header-right > div:hover,
+.header-right > div[data-hover] {
   background-color: rgba(var(--mio-color-main), var(--mio-opacity-02));
 }
 
-/* 头部搜索框过渡 */
-.hope-c-PJLV-ikCuBvM-css{
-  transition: all 0.25s ease;
+/* 头部搜索框背景过渡 */
+.header-right > div {
+  transition: background-color 0.25s;
+}
+
+/* 头部搜索框Ctrl+K日夜切换过渡 */
+kbd {
+  transition:
+   background-color 0.25s,
+   border-color 0.25s;
 }
 
 /* 修复视图切换按钮菜单背景色 */
@@ -116,10 +123,15 @@ div.hope-c-PJLV-ikCuBvM-css[data-hover] {
   backdrop-filter: blur(5px);
 }
 
-/* 导航栏圆角和毛玻璃 */
+/* 导航栏圆角 */
 .body > .nav {
   box-shadow: var(--hope-shadows-lg);
   border-radius: var(--hope-radii-xl);
+}
+
+/* 导航栏日夜切换背景过渡 */
+.body > .nav {
+  transition: background-color 0.25s;
 }
 
 /* 移除导航栏吸附状态下遮罩 */
@@ -133,17 +145,27 @@ span.nav-link:focus {
   box-shadow: var(--mio-style-border-01);
 }
 
-/* 面包屑链接过渡 兼容压缩文件预览 */
+/* 面包屑链接背景过渡 兼容压缩文件预览 */
 a.hope-breadcrumb__link,
 span.hope-breadcrumb__link {
-  transition: all 0.25s ease;
+  transition: background-color 0.25s;
 }
 
 /* ================== 列表 ================== */
 /* 列表/复选框/右键菜单 */
 /* 列表区域半透明 */
-.obj-box.hope-stack {
+div.obj-box {
   background-color: rgba(var(--mio-color-main), var(--mio-opacity-05));
+}
+
+/* 列表区域日夜切换背景过渡 */
+div.obj-box {
+  transition: background-color 0.25s;
+}
+
+/* 列表选中毛玻璃 */
+.selected {
+  backdrop-filter: blur(5px);
 }
 
 /* 列表悬停毛玻璃 */
@@ -152,15 +174,10 @@ span.hope-breadcrumb__link {
   backdrop-filter: blur(5px);
 }
 
-/* 列表选中毛玻璃 */
-.selected {
-  backdrop-filter: blur(5px);
-}
-
 /* 列表悬停过渡 */
 .viselect-item:hover,
 .viselect-item[data-hover] {
-  transition: all 0.45s ease;
+  transition: 0.45s;
 }
 
 /* 复选框颜色 兼容全局 */
@@ -211,10 +228,16 @@ div.solid-contextmenu {
   background-color: rgba(var(--mio-color-main), var(--mio-opacity-03)) !important;
 }
 
-/* 列表右键菜单项过渡 */
+/* 列表右键菜单项圆角 */
 .solid-contextmenu__item__content {
   border-radius: var(--hope-radii-md);
-  transition: all 0.25s ease;
+}
+
+/* 列表右键菜单项过渡 */
+.solid-contextmenu__item__content {
+  transition: 
+    background-color 0.25s,
+    transform 0.25s;
 }
 
 
@@ -226,9 +249,33 @@ div.hope-c-PJLV-ikSuVsl-css {
   background-color: rgba(var(--mio-color-main), var(--mio-opacity-05));
 }
 
-/* 代码块半透明 */
+/* README区域背景和文本颜色过渡 */
+hr,
+div.hope-c-PJLV-iiuDLME-css,
+div.hope-c-PJLV-ikSuVsl-css {
+  transition: background-color 0.25s;
+}
+.markdown-body {
+  transition: color 0.25s;
+}
+blockquote {
+  transition: border-left 0.25s;
+}
+
+/* 代码块毛玻璃 */
 pre {
   background-color: rgba(var(--mio-color-main), var(--mio-opacity-03)) !important;
+  backdrop-filter: blur(10px);
+}
+
+/* 代码块背景和文本颜色日夜切换过渡 */
+pre {
+  transition: background-color 0.25s;
+}
+
+/* 代码块日夜切换过渡 */
+code span {
+  transition: color 0.25s;
 }
 
 /* APlayer播放器背景毛玻璃 */
@@ -249,8 +296,8 @@ div.aplayer {
   width: auto;
 }
 
-/* 文件信息字体颜色 */
-p.hope-c-PJLV-ihZtYcd-css {
+/* 文件信息文本颜色 */
+.fileinfo .hope-text {
   color: var(--mio-color-info-text);
 }
 
@@ -271,8 +318,13 @@ a.hope-button:hover {
 }
 
 /* 文件预览选择框边框颜色去除 */
-button.hope-c-PJLV-ijSQbqe-css {
+button.hope-select__trigger {
   border-color: transparent;
+}
+
+/* 文件列表文本预览毛玻璃 */
+.obj-box .markdown {
+  backdrop-filter: blur(10px);
 }
 
 /* 压缩文件面包屑链接 */
@@ -300,13 +352,15 @@ div.left-toolbar {
 
 /* 右侧工具栏按钮背景过渡 */
 .left-toolbar-in svg {
-  transition: all 0.25s cubic-bezier(0.4, 0, 1, 1);
+  transition: 
+    background-color 0.25s cubic-bezier(0.4, 0, 1, 1),
+    color 0.25s cubic-bezier(0.4, 0, 1, 1);
 }
 
 /* 底部工具栏按钮悬停半透明 */
 .center-toolbar svg:hover,
 .center-toolbar svg[data-hover] {
-  background-color: rgba(var(--mio-color-main), var(--mio-opacity-03));
+  background-color: rgba(var(--mio-color-main), var(--mio-opacity-05));
 }
 
 /* 底部工具栏背景毛玻璃（AList自带blur_8px） */
@@ -316,19 +370,26 @@ div.left-toolbar {
 
 /* 底部工具栏按钮背景过渡 */
 .center-toolbar svg {
-  transition: all 0.25s ease;
+  transition: background-color 0.25s;
 }
 
 /* ================== 左侧文件目录树 ================== */
 /* 左侧文件目录树背景毛玻璃 */
-.hope-c-PJLV-ieGWMbI-css {
-  background-color: rgba(var(--mio-color-main), var(--mio-opacity-03)) !important;
+div.hope-c-PJLV.hope-c-PJLV-ieGWMbI-css {
+  background-color: rgba(var(--mio-color-main), var(--mio-opacity-03));
   backdrop-filter: blur(5px);
 }
 
-/* 左侧文件目录树过渡 */
-.hope-c-PJLV-igSqJIB-css {
-  transition: all 0.25s ease;
+/* 左侧文件目录树日夜切换背景过渡 */
+.hope-c-PJLV-ieGWMbI-css {
+  transition: background-color 0.25s;
+}
+
+/* 左侧文件目录树选项背景过渡 */
+.folder-tree-box p {
+  transition: 
+    background-color 0.25s,
+    color 0.25s;/* 日夜过渡 */
 }
 
 /* 左侧文件目录树选中文件夹名高亮 兼容小窗文件目录树 */
@@ -336,15 +397,9 @@ p.hope-c-PJLV-iZZmce-css {
   background-color: rgba(24, 144, 255, 0.7);
 }
 
-/* 左侧文件目录树选中文件夹名过渡 */
-p.hope-c-PJLV-iZZmce-css {
-  transition: all 0.25s ease;
-}
-
 /* 左侧文件目录树小屏设备目录文件名过长省略 兼容小窗文件目录树 */
 @media screen and (max-width: 768px) {
-  .hope-c-PJLV-igSqJIB-css,
-  .hope-c-PJLV-iZZmce-css {
+  .folder-tree-box p {
     text-overflow: ellipsis;
     overflow: hidden;
     max-width: 300px;
@@ -358,9 +413,24 @@ section.hope-drawer__content {
   backdrop-filter: blur(5px);
 }
 
+/* 本地设置背景日夜切换过渡 兼容移动端后台侧边栏 */
+.hope-drawer__content {
+  transition: background-color 0.25s;
+}
+
+/* 本地设置表单文本颜色日夜切换过渡 兼容后台 */
+.hope-form-label {
+  transition: color 0.25s;
+}
+
 /* 本地设置底部切换按钮颜色 */
 div.hope-c-PJLV-iiyTmEm-css {
   color: rgb(var(--mio-color-else));
+}
+
+/* 本地设置底部切换按钮日夜切换颜色过渡 */
+div.hope-c-PJLV-iiyTmEm-css {
+  transition: color 0.25s;
 }
 
 /* 本地设置遮罩透明度 兼容移动端后台左侧边栏 */
@@ -391,14 +461,14 @@ button.hope-icon-button:hover:disabled {
   color: var(--hope-colors-neutral8);
 }
 
-/* 搜索文件列表目录信息字体颜色 */
+/* 搜索文件列表目录信息文本颜色 */
 p.hope-c-PJLV-ibveQmV-css {
   color: var(--mio-color-info-text);
 }
 
 /* 搜索文件列表过渡 */
 .hope-c-PJLV-idcOWKd-css {
-  transition: all 0.25s ease;
+  transition: background-color 0.25s;
 }
 
 /* ================== 小窗 ================== */
@@ -423,6 +493,11 @@ div.hope-modal__overlay {
 /* 小窗图标按钮悬停半透明 */
 .hope-modal__body .hope-icon-button:hover {
   background-color: rgba(var(--mio-color-main), var(--mio-opacity-05));
+}
+
+/* 修复小窗目录树文件名长度 */
+.hope-modal__body .folder-tree-box p{
+  max-width: none;
 }
 
 /* 小窗选择框 */
@@ -495,7 +570,7 @@ div.hope-select__option[data-active] {
 
 /* 预览/本地设置选择下拉区域选项过渡 兼容后台管理 */
 .hope-select__option {
-  transition: all 0.25s ease;
+  transition: background-color 0.25s;
 }
 
 /* 视图切换菜单下拉区域毛玻璃  */
@@ -572,12 +647,14 @@ button.hope-modal__close-button:hover {
 
 /* 关闭按钮过渡 兼容本地设置/后台退出按钮 */
 button.hope-modal__close-button {
-  transition: all 0.25s ease;
+  transition: 
+    background-color 0.25s,
+    box-shadow 0.25s;
 }
 
 /* 返回顶部按钮毛玻璃 */
-div.hope-c-PJLV-igqSGEg-css {
-  background-color: rgba(var(--mio-color-main), var(--mio-opacity-05)) !important;
+div.hope-c-PJLV.hope-c-PJLV-igqSGEg-css {
+  background-color: rgba(var(--mio-color-main), var(--mio-opacity-05));
   backdrop-filter: blur(10px);
 }
 
@@ -602,21 +679,26 @@ div.hope-c-PJLV-ikvBale-css {
 }
 
 /* MD目录树毛玻璃 */
-div.hope-c-PJLV-igmvEDM-css {
-  background-color: rgba(var(--mio-color-main), var(--mio-opacity-02)) !important;
+div.hope-c-PJLV.hope-c-PJLV-igmvEDM-css {
+  background-color: rgba(var(--mio-color-main), var(--mio-opacity-02));
   backdrop-filter: blur(10px);
   box-shadow: var(--mio-style-border-02);
 }
 
-/* a标签选项过渡 兼容后台二级菜单 MD */
+/* a标签选项过渡 兼容后台二级菜单/MD/页脚*/
 a.hope-anchor {
-  transition: all 0.25s ease;
+  transition: 0.25s;
 }
 
 /* 页脚链接悬停毛玻璃 */
 .footer a:hover,
 .footer a[data-hover]{
   backdrop-filter: blur(10px);
+}
+
+/* 页脚链接span | 符号过渡 */
+.footer span {
+  transition: color 0.25s;
 }
 
 /* 页脚备案信息链接 */
@@ -658,10 +740,10 @@ div.hope-c-PJLV-ifjOQLV-css {
   backdrop-filter: blur(5px);
 }
 
-/* 登录表单区域过渡 */
+/* 登录表单区域背景日夜切换过渡 */
 .hope-c-PJLV-iubUra-css,
 .hope-c-PJLV-ifjOQLV-css {
-  transition: all 0.25s ease;
+  transition: background-color 0.25s;
 }
 
 /* 隐藏登录页链接 */
@@ -679,17 +761,32 @@ div.hope-c-PJLV-igiEgQu-css {
   color: rgb(var(--mio-color-else));
 }
 
+/* 登录页语言切换/暗色模式/通行密钥按钮日夜切换颜色过渡 */
+div.hope-c-PJLV-igiEgQu-css {
+  transition: color 0.25s;
+}
+
 /* ================== 后台管理 ================== */
 /* =========== 全局 =========== */
 /* 背景/输入框/内容框/下拉框/开关 */
-/* 后台管理整体透明 */
-#root .hope-c-PJLV-iiLzBwx-css {
+/* 后台管理背景透明 */
+#root > .hope-c-PJLV-iiLzBwx-css {
   background-color: rgba(var(--mio-color-main), var(--mio-opacity-admin));
+}
+
+/* 后台管理背景颜色过渡 */
+#root > .hope-c-PJLV-iiLzBwx-css {
+  transition: background-color 0.25s;
 }
 
 /* 输入框下提示信息 */
 div.hope-form-helper-text {
   color: var(--mio-color-info-text);
+}
+
+/* 输入框下提示信息颜色过渡 */
+div.hope-form-helper-text {
+  transition: color 0.25s;
 }
 
 /* 内容框背景毛玻璃 */
@@ -713,8 +810,13 @@ textarea.hope-textarea[data-focus] {
 }
 
 /* 下拉框空选项文字颜色 */
-.hope-select__placeholder {
+span.hope-select__placeholder {
   color: var(--mio-color-info-text);
+}
+
+/* 下拉框空选项文字颜色日夜切换过渡 */
+span.hope-select__placeholder {
+  transition: color 0.25s;
 }
 
 /* 开关颜色 */
@@ -729,11 +831,22 @@ span.hope-switch__control[data-focus] {
   box-shadow: 0 0 0 3px rgb(var(--mio-color-main));
 }
 
+/* 列表文字颜色日夜切换过渡 */
+.hope-tbody td,
+.hope-thead th {
+  transition: color 0.25s;
+}
+
 /* =========== 顶部 =========== */
-/** 头部毛玻璃 */
+/* 顶部毛玻璃 */
 #root header {
   background-color: rgba(var(--mio-color-main), var(--mio-opacity-03));
   backdrop-filter: blur(10px);
+}
+
+/* 顶部背景日夜切换过渡 */
+#root header {
+  transition: background-color 0.25s;
 }
 
 /* 修复顶部左右按钮叠加毛玻璃 */
@@ -748,20 +861,28 @@ a.hope-c-PJLV-ikmVjeJ-css {
   background-color: rgba(var(--mio-color-main), var(--mio-opacity-05));
 }
 
-/** 侧边栏背景毛玻璃 */
+/* 侧边栏背景毛玻璃 */
 div.hope-c-PJLV-ibpTetR-css > :first-child {
   background-color: rgba(var(--mio-color-main), var(--mio-opacity-03));
   backdrop-filter: blur(10px);
 }
- 
-/* 侧边栏字体和元素颜色 */
+
+ /* 侧边栏背景日夜切换过渡 */
+.hope-c-PJLV-ibpTetR-css > :first-child {
+  transition: background-color 0.25s;
+}
+
+/* 侧边栏文本和元素颜色 */
 div.hope-c-PJLV-ibBheSN-css {
   color: rgb(var(--mio-color-text));
 }
 
 /* 侧边栏一级菜单悬停过渡 */    
 .hope-c-PJLV-ieTkpPy-css {
-  transition: all 0.25s ease;
+  transition: 
+    background-color 0.25s,
+    transform 0.25s,
+    color 0.25s;/* 文字颜色日夜切换 */
 }
 
 /* 侧边栏悬停偏移 */
@@ -782,23 +903,39 @@ div.hope-c-PJLV-ibBheSN-css {
   background-color: rgba(var(--mio-color-main), var(--mio-opacity-03));
 }
 
-/* 侧边栏悬停字体颜色 */
+/* 侧边栏悬停文本颜色 */
 .hope-c-PJLV-ieTkpPy-css:hover h2,
 .hope-c-PJLV-ibBheSN-css a:hover h2 {
   color: #4a6cf7;
 }
 
 /* =========== 个人资料页 =========== */
-/* WebAuthn/对象存储背景卡片毛玻璃 */
+/* 个人资料页彩色标签背景和文本颜色日夜切换过渡 */
+.hope-c-PJLV-icSWTFQ-css span {
+  transition: 
+    background-color 0.25s,
+    color 0.25s;
+}
+/* 个人资料页WebAuthn/对象存储背景卡片毛玻璃 */
 .hope-c-PJLV-ibNJqZU-css {
   background-color: rgba(var(--mio-color-main), var(--mio-opacity-02));
   backdrop-filter: blur(10px);
 }
 
-/* SSH key背景毛玻璃 */
+/* 个人资料页WebAuthn/对象存储卡片日夜切换背景过渡 */
+.hope-c-PJLV-ibNJqZU-css {
+  transition: background-color 0.25s;
+}
+
+/* 个人资料页SSH key背景毛玻璃 */
 .hope-c-PJLV-igJUvZO-css {
   background-color: rgba(var(--mio-color-main), var(--mio-opacity-02));
   backdrop-filter: blur(10px);
+}
+
+/* 个人资料页SSH key日夜切换背景过渡 */
+.hope-c-PJLV-igJUvZO-css {
+  transition: background-color 0.25s;
 }
 
 /* =========== 任务页 =========== */
@@ -809,13 +946,32 @@ div.hope-c-PJLV-iiFYbNx-css,
   color: rgb(var(--mio-color-text));
 }
 
+/* 任务列表文字颜色过渡 */
+div.hope-c-PJLV-ibOWCWv-css,
+div.hope-c-PJLV-iiFYbNx-css,
+.hope-c-PJLV-ipqyVI-css p{
+  transition: color 0.25s;
+}
+
 /* 任务列表背景毛玻璃 */
 .hope-c-PJLV-igHwkeM-css {
   background-color: rgba(var(--mio-color-main), var(--mio-opacity-02));
   backdrop-filter: blur(10px);
 }
 
+/* 任务列表背景日夜切换过渡 */
+.hope-c-PJLV-igHwkeM-css {
+  transition: background-color 0.25s;
+}
+
 /* =========== 用户页 =========== */
+/* 用户列表标签文字颜色日夜切换过渡 */
+.hope-tbody span {
+  transition: 
+    background-color 0.25s,
+    color 0.25s;
+}
+
 /* 用户权限选择框毛玻璃 兼容元信息选择框 */
 .hope-flex > .hope-form-control {
   background-color: rgba(var(--mio-color-main), var(--mio-opacity-02));
@@ -824,20 +980,26 @@ div.hope-c-PJLV-iiFYbNx-css,
   padding: var(--hope-space-2);
 }
 
-/* 用户页确认删除弹窗边框去除 */
+/* 用户确认删除弹窗边框去除 */
 section.hope-popover__content,
 section.hope-popover__content div {
   border-style: none;
 }
 
-/* 用户页确认删除弹窗毛玻璃 */
+/* 用户确认删除弹窗毛玻璃 兼容文件下载二维码背景 */
 section.hope-popover__content {
   background-color: rgba(var(--mio-color-main), var(--mio-opacity-02));
   backdrop-filter: blur(10px);
 }
 
-/* =========== 存储页 =========== */
-/* 卡片/列表/输入框/选择框*/
+/* =========== 存储 =========== */
+/* 标签/卡片/列表/输入框/选择框*/
+/* 存储驱动筛选标签毛玻璃 */
+span.hope-select__tag {
+  background-color: rgba(var(--mio-color-main), var(--mio-opacity-05));
+border-color: unset;
+}
+
 /* 存储卡片布局毛玻璃 */
 .hope-c-PJLV-icFwTcd-css > div {
   background-color: rgba(var(--mio-color-main), var(--mio-opacity-02));
@@ -852,7 +1014,14 @@ section.hope-popover__content {
 
 /* 存储卡片布局过渡 */
 .hope-c-PJLV-icFwTcd-css > div {
-  transition: all 0.3s ease;
+  transition: 
+    background-color 0.25s,/* 日夜切换 */
+    backdrop-filter 0.25s;
+}
+
+/* 存储卡片切换文本颜色日夜切换过渡 */
+.hope-switch .hope-switch__label {
+  transition: color 0.25s;
 }
 
 /* 存储列表悬停毛玻璃 兼容用户列表 */
@@ -868,7 +1037,9 @@ tbody.hope-tbody tr:hover td {
 
 /* 存储列表悬停过渡 兼容用户列表 */
 .hope-tbody tr {
-  transition: all 0.3s ease;
+  transition: 
+    background-color 0.25s,/* 日夜切换 */
+    backdrop-filter 0.25s;
 }
 
 /* 修复添加存储驱动输入框 */
@@ -905,7 +1076,7 @@ div.hope-select__trigger[data-focus] {
   }
 }
 
-/* 选择框字体颜色 */
+/* 选择框文本颜色 */
 label.hope-c-PJLV-ikGHENL-css {
   color: var(--mio-color-info-text);
 }
@@ -923,110 +1094,4 @@ div.hope-c-PJLV-ijyJlsk-css {
 div.hope-c-PJLV-iddboZy-css {
   background-color: rgba(var(--mio-color-main), var(--mio-opacity-02));
   backdrop-filter: blur(10px);
-}
-
-/* ================== 日夜切换过渡 ================== */
-/* 日夜切换过渡 上面代码中的transition是交互需要 */
-/* =========== 首页 =========== */
-/* 列表区域过渡 */
-.obj-box.hope-stack {
-  transition: background-color 0.25s ease;
-}
-
-/* 导航栏过渡 */
-.body > .nav {
-  transition: background-color 0.25s ease;
-}
-
-/* README区域背景与文本过渡 */
-hr,
-blockquote,
-.markdown-body,
-div.hope-c-PJLV-iiuDLME-css,
-div.hope-c-PJLV-ikSuVsl-css {
-  transition: all 0.25s ease;
-}
-
-/* 左侧文件目录树背景过渡 */
-.hope-c-PJLV-ieGWMbI-css {
-  transition: background-color 0.25s ease;
-}
-
-/* 页脚链接span过渡 */
-.footer span {
-  transition: all 0.25s ease;
-}
-
-/* 搜索框Ctrl+K过渡 */
-kbd {
-  transition: all 0.25s ease;
-}
-
-/* 本地设置底部切换按钮颜色过渡 */
-div.hope-c-PJLV-iiyTmEm-css {
-  transition: all 0.25s ease;
-}
-
-/* =========== 后台 =========== */
-/* 登录页语言切换/暗色模式/通行密钥按钮颜色过渡 */
-div.hope-c-PJLV-igiEgQu-css {
-  transition: all 0.25s ease;
-}
-
-/* 本地设置背景 兼容移动端后台侧边栏 */
-.hope-drawer__content,
-.hope-form-label {
-  transition: all 0.25s ease;
-}
-
-/* 后台侧边栏 */
-.hope-c-PJLV-ibpTetR-css > :first-child {
-  transition: all 0.25s ease;
-}
-
-/** 头部过渡 */
-#root header {
-  transition: all 0.25s ease;
-}
-
-/* 输入框下提示信息过渡 */
-div.hope-form-helper-text {
-  transition: all 0.25s ease;
-}
-
-/* 后台管理整体过渡 */
-#root .hope-c-PJLV-iiLzBwx-css {
-    transition: all 0.25s ease;
-}
-
-/* WebAuthn/对象存储卡片背景过渡 */
-.hope-c-PJLV-ibNJqZU-css {
-  transition: all 0.25s ease;
-}
-
-/* SSH key背景过渡 */
-.hope-c-PJLV-igJUvZO-css {
-  transition: all 0.25s ease;
-}
-
-/* 彩色标签过渡 */
-span.hope-c-PJLV-ijhzIfm-css {
-  transition: all 0.25s ease;
-}
-
-/* 开关过渡 */
-span.hope-switch__control {
-  transition: all 0.25s ease;
-}
-
-/* 任务列表背景过渡 */
-.hope-c-PJLV-igHwkeM-css {
-  transition: all 0.25s ease;
-}
-
-/* 任务列表文字颜色过渡 */
-div.hope-c-PJLV-ibOWCWv-css,
-div.hope-c-PJLV-iiFYbNx-css,
-.hope-c-PJLV-ipqyVI-css p{
-  transition: all 0.25s ease;
 }
