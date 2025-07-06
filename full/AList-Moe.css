@@ -1,5 +1,5 @@
 /*
- * AList Moe v1.13-rc - 202507061929
+ * AList Moe v1.13-rc - 202507061959
  * Repository: https://github.com/SajunaOo/AList-Moe
  * Author: 朱茱 (https://www.isajuna.com)
  * (C) 2025 朱茱 - AGPL-3.0 Licensed
@@ -205,10 +205,12 @@ span.hope-checkbox__control:hover {
   border-color: rgb(var(--moe-color-checkbox));
 }
 
-/* 复选框元素和背景颜色过渡 */
+/* 复选框边框，阴影，元素和背景颜色过渡 */
 span.hope-checkbox__control {
   transition:
-    color .25s, 
+    border-color .25s,
+    box-shadow .25s,
+    color .25s,
     background-color .25s;/* 日夜切换 */
 }
 
