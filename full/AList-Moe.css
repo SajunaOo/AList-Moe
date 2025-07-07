@@ -1,5 +1,5 @@
 /*
- * AList Moe v1.13-rc - 202507061959
+ * AList Moe v1.13-rc - 202507072058
  * Repository: https://github.com/SajunaOo/AList-Moe
  * Author: 朱茱 (https://www.isajuna.com)
  * (C) 2025 朱茱 - AGPL-3.0 Licensed
@@ -359,8 +359,8 @@ button.hope-select__trigger {
 }
 
 /* 文件预览第三方程序图标背景悬停半透明 */
-a.hope-c-PJLV-idrWMwW-css:hover,
-a.hope-c-PJLV-idrWMwW-css[data-hover] {
+.hope-c-PJLV-igXrpAn-css a:hover,
+.hope-c-PJLV-igXrpAn-css a[data-hover] {
   background-color: rgba(var(--moe-color-main), var(--moe-opacity-05));
 }
 
@@ -750,6 +750,7 @@ a.hope-anchor {
 /* 页脚链接悬停毛玻璃 */
 .footer a:hover,
 .footer a[data-hover] {
+  background-color: rgba(var(--moe-color-main), var(--moe-opacity-03));
   backdrop-filter: blur(10px);
 }
 
@@ -760,6 +761,7 @@ a.hope-anchor {
 
 /* 页脚备案信息链接 */
 .beian-link {
+  background-color: transparent !important;
   color: rgb(var(--moe-color-text));
   text-decoration: none;
   font-size: 14px;
