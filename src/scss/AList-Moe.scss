@@ -1,0 +1,1151 @@
+/**
+ * AList Moe v1.14-alpha - 202507090020
+ * Repository: https://github.com/SajunaOo/AList-Moe
+ * Author: 朱茱 (https://www.isajuna.com)
+ * (C) 2025 朱茱 - AGPL-3.0 Licensed
+ * 
+ * Modified beautification component for:
+ * AList v3.45 - (C) Andy Hsu - AGPL-3.0 Licensed
+*/
+
+/** 
+ * This SCSS file is designed to enhance the AList interface with a modern, semi-transparent aesthetic.
+ * It includes global variables for light and dark modes, basic styles, and specific component adjustments.
+ * The design focuses on readability and usability while maintaining a clean, minimalistic look.
+*/
+
+/* ================== 混合宏定义 ================== */
+@mixin glass($opacity, $blur) {
+  background-color: rgba(var(--moe-color-main), $opacity);
+  backdrop-filter: blur($blur);
+}
+
+@mixin background-color($opacity) {
+  background-color: rgba(var(--moe-color-main), $opacity);
+}
+
+/* ================== 全局变量定义 ================== */
+/* 日间与夜间模式下的主色、文本色、透明度、复选框色、背景图 */
+:root {
+  /* 颜色系统 */
+  --moe-color-main: 255, 255, 255; /* 主色调 */
+  --moe-color-text: 0, 0, 0; /* 文本颜色 */
+  --moe-color-info-text: #444; /* 信息文本颜色 */
+  --moe-color-checkbox: 0, 0, 0; /* 复选框颜色 */
+  --moe-color-theme: 248, 179, 78; /* 主题色 */
+  --moe-color-else: 0, 0, 0; /* 其他元素颜色 */
+  --moe-color-border: 0, 0, 0; /* 边框/阴影颜色 */
+
+  /* 阴影 */
+  --moe-style-border-01: 0 0 0 1px rgb(var(--moe-color-border));
+  --moe-style-border-02: 0 0 0 2px rgb(var(--moe-color-border));
+
+  /* 透明度 */
+  --moe-opacity-admin: 0.2; /* 后台透明度 */
+  --moe-opacity-02: 0.2; /* 20%透明度 */
+  --moe-opacity-03: 0.3; /* 30%透明度 */
+  --moe-opacity-05: 0.5; /* 50%透明度 */
+  
+  /* 背景 */
+  --moe-bg-image: url("https://s21.ax1x.com/2025/07/03/pVKkOQf.webp");  /* 默认背景图 */
+}    
+
+/* 夜间模式变量覆盖 */
+.hope-ui-dark {
+  --moe-color-main: 0, 0, 0;
+  --moe-color-text: 255, 255, 255;
+  --moe-color-info-text: var(--hope-colors-neutral11);
+  --moe-color-checkbox: 255, 255, 255;
+  --moe-color-else: 255, 255, 255;
+  --moe-color-border: 255, 255, 255;
+
+  --moe-style-border-01: 0 0 0 1px rgb(var(--moe-color-border));
+  --moe-style-border-02: 0 0 0 2px rgb(var(--moe-color-border));
+
+  --moe-opacity-admin: 0.5;
+  --moe-bg-image: url("https://s21.ax1x.com/2025/07/03/pVKkLSP.webp");
+}
+
+/* ================== 页面背景 ================== */
+/* 页面背景 */
+body {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  background-position-x: center;
+  background-image: var(--moe-bg-image);
+}
+
+/* ================== 头部区域 ================== */
+/* Logo/头部/搜索框/视图切换按钮 */
+/* Logo尺寸 */
+.header-left .hope-image {
+  width: auto;
+  height: 35px;
+}
+
+/* 头部区域透明 */
+#root > .header {
+  background-color: transparent;
+}
+
+/**
+ * 头部
+ *
+ * 搜索框背景毛玻璃
+ * 搜索框背景颜色过渡
+ * 搜索框悬停半透明
+ * 修复视图切换按钮菜单背景颜色
+*/
+.header-right {
+  > div {
+    backdrop-filter: blur(10px);
+    transition: background-color 0.25s;
+
+    &:hover,
+    &[data-hover] {
+      @include background-color(var(--moe-opacity-02));
+    }
+  }
+
+  .hope-menu__trigger {
+    background-color: rgba(var(--moe-color-theme), 0.15);
+    box-shadow: none !important;
+  }
+}
+
+/* 头部搜索框内Ctrl+K日背景和边框颜色日夜切换过渡 */
+kbd {
+  transition:
+    background-color 0.25s,
+    border-color 0.25s;
+}
+
+/* ================== 导航 ================== */
+/**
+ * 导航栏
+ *
+ * 背景毛玻璃
+ * 背景颜色日夜过渡
+ * 圆角和阴影适配
+ * 移除吸附状态下遮罩
+*/
+.body > .nav {
+  @include glass(var(--moe-opacity-05), 5px);
+  transition: background-color 0.25s;
+  box-shadow: var(--hope-shadows-lg);
+  border-radius: var(--hope-radii-xl);
+
+  &::after {
+    display: none;
+  }
+}
+
+/* 面包屑链接焦点阴影 */
+.hope-c-PJLV.hope-breadcrumb__link:focus {
+  box-shadow: var(--moe-style-border-01);
+}
+
+/* 面包屑链接背景颜色过渡 兼容压缩文件预览 */
+.hope-c-PJLV.hope-breadcrumb__link {
+  transition: background-color 0.25s;
+}
+
+/* ================== 列表 ================== */
+/* 列表/复选框/右键菜单 */
+/* 列表区域半透明 日夜切换背景颜色过渡 */
+.hope-c-PJLV.obj-box {
+  @include background-color(var(--moe-opacity-05));
+  transition: background-color 0.25s;
+}
+
+/* 列表选中毛玻璃 */
+.selected {
+  backdrop-filter: blur(5px);
+}
+
+/* 列表悬停毛玻璃 悬停过渡 */
+.viselect-item {
+  &:hover,
+  &[data-hover] {
+    backdrop-filter: blur(5px);
+    transition: 0.45s;
+  }
+}
+
+/**
+ * 复选框
+ *
+ * 元素和背景颜色
+ * 焦点阴影
+ * 额外悬停阴影
+ * 边框，阴影 元素和背景颜色过渡
+ * 框内SVG颜色过渡
+*/
+span.hope-checkbox__control {
+  color: rgb(var(--moe-color-checkbox));
+  @include background-color(var(--moe-opacity-05));
+  transition:
+    border-color .25s,
+    box-shadow .25s,
+    color .25s,
+    background-color .25s;
+  
+  svg {
+    transition: color .25s;
+  }
+  
+  &[data-focus],
+  &:hover {
+    box-shadow: 0 0 0 2px rgb(var(--moe-color-checkbox));
+    border-color: rgb(var(--moe-color-checkbox));
+  }
+}
+
+/**
+ * 列表右键菜单
+ *
+ * 背景透明 伪元素背景毛玻璃
+ * 一级和二级菜单选项文本颜色 选项圆角
+ * 选项悬停和焦点偏移 悬停和焦点半透明
+ * 二级菜单选项悬停和焦点时一级菜单选项背景颜色
+*/
+
+/* 列表右键菜单背景透明 伪元素背景毛玻璃 */
+.solid-contextmenu {
+  background-color: transparent !important;
+  
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    @include glass(var(--moe-opacity-02), 10px);
+    border-radius: inherit;
+    z-index: -1;
+  }
+}
+
+/* 一级和二级菜单选项文本颜色 选项圆角 */
+.solid-contextmenu__item__content {
+  .hope-text {
+    color: rgb(var(--moe-color-text));
+  }
+    
+  color: rgb(var(--moe-color-text)) !important;
+  border-radius: var(--hope-radii-md);
+  transition:
+    background-color 0.25s,
+    transform 0.25s;
+
+  /* 选项悬停和焦点偏移 悬停和焦点半透明 */
+  &:hover,
+  &:focus {
+    background-color: rgba(var(--moe-color-main), var(--moe-opacity-03)) !important;
+    transform: translateX(3px);
+  }
+}
+
+/* 二级菜单选项悬停和焦点时一级菜单选项背景颜色 */
+div.solid-contextmenu__item:not(.solid-contextmenu__item--disabled) {
+  &:hover > .solid-contextmenu__item__content,
+  &:focus > .solid-contextmenu__item__content {
+    @include background-color(var(--moe-opacity-03));
+  }
+}
+
+/* ================== 预览 ================== */
+/* README/代码块/播放器/缩略图/信息/按钮/预览 */
+/* README区域半透明 */
+.hope-c-PJLV.hope-c-PJLV-iiuDLME-css,
+.hope-c-PJLV.hope-c-PJLV-ikSuVsl-css {
+  @include background-color(var(--moe-opacity-05));
+  transition: background-color 0.25s;/* 日夜切换 */
+}
+
+/* README区域元素和文本颜色日夜过渡 */
+hr {
+  transition: background-color 0.25s;
+}
+.markdown-body {
+  transition: color 0.25s;
+}
+blockquote {
+  transition: border-left 0.25s;
+}
+
+
+/**
+ * 代码块
+ *
+ * 背景毛玻璃
+ * 背景颜色日夜切换过渡
+ * 文本颜色日夜切换过渡
+*/
+pre {
+  background-color: rgba(var(--moe-color-main), var(--moe-opacity-03)) !important;
+  backdrop-filter: blur(10px);
+  transition: background-color 0.25s;
+  
+  code span {
+    transition: color 0.25s;
+  }
+}
+
+/**
+ * aplayer播放器
+ *
+ * 背景毛玻璃
+ * 列表悬停透明
+*/  
+div.aplayer {
+  @include glass(var(--moe-opacity-02), 10px);
+  
+  .aplayer-list {
+    ol li:hover,
+    .aplayer-list-light {
+      background-color: rgba(var(--moe-color-main), var(--moe-opacity-02)) !important;
+    }
+  }
+}
+
+/**
+ * 文件信息
+ *
+ * 缩略图尺寸自适应
+ * 信息文本颜色
+ * 文本颜色日夜切换过渡
+*/
+.fileinfo {
+  .hope-image {
+    height: auto;
+    width: auto;
+  }
+  
+  .hope-text {
+    color: var(--moe-color-info-text);
+  }
+}
+
+/**
+ * 文件下载按钮
+ *
+ * 背景毛玻璃
+ * 悬停半透明
+ * 额外悬停阴影
+*/
+a.hope-button {
+  @include glass(var(--moe-opacity-05), 10px);
+  
+  &:hover {
+    @include background-color(var(--moe-opacity-02));
+    box-shadow: var(--moe-style-border-02);
+  }
+}
+
+/* 文件预览下拉框按钮边框颜色去除 */
+button.hope-select__trigger {
+  border-color: transparent;
+}
+
+/* 文件预览第三方程序图标背景悬停半透明 */
+.hope-c-PJLV-igXrpAn-css a {
+  &:hover,
+  &[data-hover] {
+    @include background-color(var(--moe-opacity-05));
+  }
+}
+
+/**
+ * 文本&压缩文件预览
+ *
+ * 文本预览背景毛玻璃
+ * 压缩文件面包屑链接
+ * 压缩文件面包屑链接悬停毛玻璃
+*/
+.obj-box {
+  .markdown {
+    backdrop-filter: blur(10px);
+  }
+  
+  .hope-breadcrumb__link {
+    cursor: pointer;
+    padding: var(--hope-space-1);
+    border-radius: var(--hope-radii-lg);
+    word-break: break-all;
+    
+    &:hover {
+      @include glass(var(--moe-opacity-02), 10px);
+      color: unset;
+    }
+  }
+}
+
+/* ================== 工具栏 ================== */
+/**
+ * 右侧工具栏
+ *
+ * 背景毛玻璃
+ * 按钮背景和元素颜色过渡 
+*/
+div.left-toolbar {
+  @include glass(var(--moe-opacity-03), 5px);
+  
+  .left-toolbar-in svg {
+    transition: 
+      background-color 0.25s cubic-bezier(0.4, 0, 1, 1),
+      color 0.25s cubic-bezier(0.4, 0, 1, 1);
+  }
+}
+
+/**
+ * 底部工具栏
+ *
+ * 背景毛玻璃（AList自带blur_8px）
+ * 背景日夜切换过渡
+ * 右侧 按钮悬停半透明
+ * 按钮背景颜色过渡
+*/
+.center-toolbar {
+  div {
+    @include background-color(var(--moe-opacity-03));
+    transition: background-color 0.25s;
+  }
+  
+  svg {
+    transition: background-color 0.25s;
+    
+    &:hover,
+    &[data-hover] {
+      @include background-color(var(--moe-opacity-05));
+    }
+  }
+}
+
+/* ================== 左侧文件目录树 ================== */
+/* 左侧文件目录树背景毛玻璃 */
+div.hope-c-PJLV.hope-c-PJLV-ieGWMbI-css {
+  background-color: rgba(var(--moe-color-main),var(--moe-opacity-03));
+  backdrop-filter: blur(5px);
+  transition: background-color 0.25s;/* 日夜切换 */
+}
+
+/* 左侧文件目录树选项背景和元素颜色过渡 兼容小窗文件目录树 */
+.folder-tree-box p {
+  transition:
+    background-color 0.25s,
+    color 0.25s;/* 日夜过渡 */
+}
+
+/* 左侧文件目录树选中文件夹名高亮 兼容小窗文件目录树 */
+.hope-c-PJLV.hope-c-PJLV-iZZmce-css {
+  background-color: rgba(24, 144, 255, 0.7);
+}
+
+/* 左侧文件目录树小屏设备目录文件名过长省略 */
+@media screen and (max-width: 768px) {
+  .folder-tree-box p {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    max-width: 300px;
+  }
+}
+
+/* ================== 本地设置 ================== */
+/* 本地设置背景毛玻璃 兼容移动端后台左侧边栏 */
+section.hope-drawer__content {
+  @include glass(var(--moe-opacity-03), 5px);
+  transition: background-color 0.25s;/* 日夜切换 */
+}
+
+/* 本地设置表单文本颜色日夜切换过渡 兼容后台 */
+.hope-form-label {
+  transition: color 0.25s;
+}
+
+/* 本地设置底部切换按钮颜色 */
+div.hope-c-PJLV-iiyTmEm-css {
+  color: rgb(var(--moe-color-else));
+  transition: color 0.25s;/* 日夜切换 */
+}
+
+/* 本地设置遮罩透明度 兼容移动端后台左侧边栏 */
+div.hope-drawer__overlay {
+  background-color: rgba(0, 0, 0, var(--moe-opacity-03));
+}
+
+/**
+ * 本地设置组件修复 兼容搜索
+ *
+ * 下拉框按钮半透明
+ * 输入框半透明
+ * 输入框悬停和焦点半透明
+*/
+.hope-modal__body {
+  .hope-select__trigger {
+    backdrop-filter: none;
+  }
+  
+  .hope-input {
+    backdrop-filter: none;
+    
+    &:hover,
+    &:focus {
+      backdrop-filter: none;
+    }
+  }
+}
+
+/* ================== 搜索 ================== */
+/**
+ * 搜索
+ *
+ * 搜索按钮图标禁用和悬停颜色
+*/
+button.hope-icon-button {
+  &:disabled,
+  &:hover:disabled {
+    color: var(--hope-colors-neutral8);
+  }
+}
+
+/* 搜索文件列表目录信息文本颜色 */
+.hope-c-PJLV.hope-c-PJLV-ibveQmV-css {
+  color: var(--moe-color-info-text);
+  transition: background-color 0.25s;/* 日夜切换 */
+}
+
+/* ================== 小窗 ================== */
+/* 背景/遮罩/图标按钮/选择框/标题 */
+/**
+ * 小窗
+ *
+ * 主体毛玻璃 兼容搜索
+ * 遮罩透明度
+ * 图标按钮毛玻璃 兼容搜索
+ * 图标按钮悬停半透明
+ * 修复小窗目录树文件名长度
+*/
+section.hope-modal__content {
+  @include glass(var(--moe-opacity-02), 10px);
+}
+
+div.hope-modal__overlay {
+  background-color: rgba(0, 0, 0, var(--moe-opacity-03));
+}
+
+.hope-modal__body {
+  button.hope-icon-button {
+    @include background-color(var(--moe-opacity-02));
+    backdrop-filter: none;
+    
+    &:hover {
+      @include background-color(var(--moe-opacity-05));
+    }
+  }
+  
+  .folder-tree-box p {
+    max-width: none;
+  }
+}
+
+/**
+ * 小窗
+ *
+ * 文件上传区域高度
+ * 文件上传标题位置微调
+ * 文件上传选择框区域内布局调整
+*/
+.hope-c-PJLV.hope-c-PJLV-ihJFHdl-css {
+  height: auto;
+  
+  h2 {
+    margin-top: 7px;
+  }
+
+  :nth-child(4) {
+    gap: 8px;
+    margin: 0 0 10px 7px;
+    flex-wrap: wrap;
+
+    @media screen and (min-width: 768px) {
+      margin-left: 0;
+    }
+  }
+}
+
+/* 小窗 文件上传方式下拉框按钮宽度微调*/
+@media screen and (max-width: 768px) {
+  .hope-c-PJLV.hope-c-PJLV-iclbYsV-css {
+    width: 40%;
+  }
+}
+
+/* 小窗选择框 */
+.hope-c-PJLV-ieqwtmo-css label {
+  @include background-color(var(--moe-opacity-02));
+  border-radius: var(--hope-radii-md);
+  padding: var(--hope-space-2);
+}
+
+/* ================== 下拉菜单 ================== */
+/* 下拉框/菜单 */
+/**
+ * 下拉框按钮 兼容搜索/文件预览/设置下拉框按钮
+ * 
+ * 背景毛玻璃
+ * 悬停和焦点半透明
+ * 额外焦点阴影
+*/
+button.hope-select__trigger {
+  @include glass(var(--moe-opacity-02), 10px);
+  
+  &:hover,
+  &:focus {
+    @include background-color(var(--moe-opacity-05));
+  }
+  
+  &:focus,
+  &[data-focus] {
+    box-shadow: var(--moe-style-border-01);
+    border-color: rgb(var(--moe-color-border));
+  }
+}
+
+
+/**
+ * 下拉框 兼容预览/本地设置/后台管理
+ * 
+ * 背景毛玻璃
+ * 选项背景颜色过渡
+ * 选项激活背景半透明
+*/
+div.hope-select__content {
+  @include glass(var(--moe-opacity-02), 10px);
+  
+  .hope-select__option {
+    transition: background-color 0.25s;
+    
+    &[data-active] {
+      @include background-color(var(--moe-opacity-03));
+    }
+  }
+}
+
+/**
+ * 菜单 兼容语言切换/视图切换
+ * 
+ * 背景毛玻璃
+ * 选项激活背景半透明
+*/
+div.hope-menu__content {
+  @include glass(var(--moe-opacity-02), 10px);
+  
+  .hope-menu__item[data-active] {
+    @include background-color(var(--moe-opacity-03));
+  }
+}
+
+/* ================== 输入框 ================== */
+/**
+ * 输入框
+ * 
+ * 背景毛玻璃
+ * 悬停和焦点毛玻璃
+ * 焦点阴影
+ * 提示信息文本颜色
+*/
+input.hope-input {
+  @include glass(var(--moe-opacity-02), 10px);
+  
+  &:hover,
+  &:focus {
+    @include background-color(var(--moe-opacity-02));
+  }
+  
+  &:focus,
+  &[data-focus] {
+    border-color: unset;
+    box-shadow: var(--moe-style-border-01);
+  }
+  
+  &::placeholder {
+    color: var(--hope-colors-neutral11);
+  }
+}
+
+/* ================== 按钮 ================== */
+/**
+ * 按钮
+ * 
+ * 背景毛玻璃
+ * 禁用状态透明和去除悬停阴影
+ * 悬停时半透明
+ * 额外悬停阴影
+*/
+button.hope-button {
+  @include glass(var(--moe-opacity-05), 10px);
+  
+  &:disabled,
+  &:hover:disabled {
+    @include background-color(var(--moe-opacity-05));
+    color: var(--hope-colors-neutral9);
+    box-shadow: none;
+  }
+  
+  &:hover {
+    @include background-color(var(--moe-opacity-02));
+    box-shadow: var(--moe-style-border-02);
+  }
+}
+
+/**
+ * 关闭按钮 兼容本地设置/后台退出按钮
+ * 
+ * 背景颜色和阴影过渡
+ * 焦点阴影
+ * 额外悬停阴影
+*/
+button.hope-modal__close-button {
+  transition:
+    background-color 0.25s,
+    box-shadow 0.25s;
+  
+  &:hover,
+  &:focus {
+    box-shadow: var(--moe-style-border-02);
+  }
+}
+
+/**
+ * 返回顶部
+ * 
+ * 背景毛玻璃
+ * 背景和元素颜色过渡
+ * 悬停颜色
+*/
+div.hope-c-PJLV.hope-c-PJLV-igqSGEg-css {
+  @include background-color(var(--moe-opacity-05));
+  color: rgb(var(--moe-color-theme));
+  backdrop-filter: blur(10px);
+  transition: 
+    background-color 0.25s,
+    color 0.25s;
+  
+  &:hover,
+  &[data-hover] {
+    background-color: rgb(var(--moe-color-theme));
+    color: white;
+  }
+}
+
+/* 隐藏通知栏关闭按钮 */
+.hope-notification__list .hope-close-button {
+  display: none;
+}
+
+/* ================== 其他组件 ================== */
+/* 通知栏/MD目录树/a标签选项/页脚 */
+/* 通知栏毛玻璃 */
+.hope-c-PJLV.hope-notification {
+  @include glass(var(--moe-opacity-02), 10px);
+}
+
+/* 报错提示信息背景毛玻璃 */
+.hope-c-PJLV.hope-c-PJLV-iwUksD-css,
+.hope-c-PJLV.hope-c-PJLV-ikvBale-css {
+  @include glass(var(--moe-opacity-02), 10px);
+}
+
+/* MD目录树毛玻璃 */
+.hope-c-PJLV.hope-c-PJLV.hope-c-PJLV-igmvEDM-css {
+  @include glass(var(--moe-opacity-02), 10px);
+  box-shadow: var(--moe-style-border-02);
+}
+
+/* a标签选项过渡 兼容后台二级菜单/MD/页脚/第三方程序 */
+a.hope-anchor {
+  transition: 0.25s;
+}
+
+/**
+ * 页脚链接
+ * 
+ * 悬停背景毛玻璃
+ * span | 符号元素颜色过渡
+ * 备案信息链接
+*/
+.footer {
+  a {
+    &:hover,
+    &[data-hover] {
+      @include glass(var(--moe-opacity-03), 10px);
+    }
+  }
+  
+  span {
+    transition: color 0.25s;
+  }
+  
+  .beian-link {
+    background-color: transparent !important;
+    color: rgb(var(--moe-color-text));
+    text-decoration: none;
+    font-size: 14px;
+  }
+}
+
+/* ================== 登录页面 ================== */
+/**
+ * 登录页
+ * 
+ * Logo尺寸
+ * 隐藏登录标题和装饰元素
+ * 背景透明
+ * 表单区域毛玻璃效果
+ * 按钮叠加毛玻璃
+ * 语言切换/暗色模式/通行密钥按钮
+ * 
+*/
+.hope-c-PJLV {
+  &.hope-c-PJLV-ibwASZs-css {
+    width: auto;
+    height: 48px;
+  }
+
+  &.hope-c-PJLV-ibojvKk-css,
+  &.hope-c-PJLV-ifJliWT-css,
+  &.hope-c-PJLV-igjRXTJ-css,
+  &.hope-c-PJLV-idKXllh-css {
+    display: none;
+  }
+
+  &.hope-c-PJLV-ibiABng-css,
+  &.hope-c-PJLV-ihWgyFw-css {
+    background-color: transparent;
+  }
+
+  &.hope-c-PJLV-iubUra-css,
+  &.hope-c-PJLV-ifjOQLV-css {
+  @include glass(var(--moe-opacity-05), 5px);
+  }
+
+  &.hope-c-PJLV-ifDMJcV-css {
+    backdrop-filter: none;
+  }
+
+  &.hope-c-PJLV-igiEgQu-css {
+    color: rgb(var(--moe-color-else));
+    transition: color 0.25s;/* 日夜过渡 */
+  }
+}
+
+/* ================== 后台管理 ================== */
+/* =========== 全局 =========== */
+/* 背景/输入框/内容框/下拉框/开关 */
+/* 后台管理背景透明 */
+#root > .hope-c-PJLV-iiLzBwx-css {
+  @include background-color(var(--moe-opacity-admin));
+  transition: background-color 0.25s;/* 日夜切换 */
+}
+
+/* 输入框下提示信息 */
+div.hope-form-helper-text {
+  color: var(--moe-color-info-text);
+  transition: color 0.25s;/* 日夜切换 */
+}
+
+/**
+ * 文本区域
+ * 
+ * 背景毛玻璃
+ * 悬停和焦点毛玻璃
+ * 焦点阴影
+ * 提示信息文本颜色
+*/
+textarea.hope-textarea {
+  @include glass(var(--moe-opacity-02), 10px);
+  
+  &:hover,
+  &:focus {
+    @include glass(var(--moe-opacity-02), 10px);
+  }
+  
+  &:focus,
+  &[data-focus] {
+    border-color: unset;
+    box-shadow: var(--moe-style-border-01);
+  }
+}
+
+/* 下拉框空选项文本颜色 */
+span.hope-select__placeholder {
+  color: var(--moe-color-info-text);
+  transition: color 0.25s;/* 日夜切换 */
+}
+
+/**
+ * 开关
+ * 
+ * 元素颜色
+ * 焦点阴影
+*/
+span.hope-switch__control {
+  border: unset;
+  color: rgb(var(--moe-color-checkbox));
+  
+  &[data-focus] {
+    border-color: unset;
+    box-shadow: 0 0 0 3px rgb(var(--moe-color-main));
+  }
+}
+
+/* 列表文本颜色日夜切换过渡 */
+.hope-tbody td,
+.hope-thead th {
+  transition: color 0.25s;
+}
+
+/* =========== 头部 =========== */
+/**
+ * 头部
+ * 
+ * 背景毛玻璃
+ * 背景颜色日夜切换过渡
+ * 修复左右按钮背景颜色和叠加毛玻璃
+*/
+#root header {
+  @include glass(var(--moe-opacity-03), 10px);
+  transition: background-color 0.25s;/* 日夜切换 */
+  
+  .hope-icon-button {
+    @include background-color(var(--moe-opacity-02));
+    backdrop-filter: none;
+  }
+}
+
+/* =========== 侧边栏 =========== */
+/**
+ * 侧边栏
+ * 
+ * 背景毛玻璃
+ * 背景颜色日夜过渡
+ * 文本和元素颜色
+ * 一级菜单悬停时颜色、文本颜色和transform过渡
+ * 悬停偏移和半透明
+ * 悬停文本颜色
+*/
+.hope-c-PJLV.hope-c-PJLV-ibpTetR-css > :first-child {
+  @include glass(var(--moe-opacity-03), 10px);
+  transition: background-color 0.25s;/* 日夜切换 */
+}
+
+.hope-c-PJLV.hope-c-PJLV-ibBheSN-css {
+  color: rgb(var(--moe-color-text));
+}
+
+.hope-c-PJLV-ieTkpPy-css {
+  transition:
+    transform 0.25s,
+    background-color 0.25s,
+    color 0.25s;
+  
+  &:hover,
+  .hope-c-PJLV-ibBheSN-css a:hover {
+    transform: translateX(3px);
+    @include background-color(var(--moe-opacity-03));
+    
+    h2 {
+      color: #4a6cf7;
+    }
+  }
+}
+
+/**
+ * 侧边栏选中状态
+ * 
+ * 背景半透明
+ * 悬停背景半透明
+*/
+.hope-c-PJLV.hope-c-PJLV-ikmVjeJ-css {
+  @include background-color(var(--moe-opacity-05));
+  
+  &:hover,
+  &[data-hover] {
+    @include background-color(var(--moe-opacity-03));
+  }
+}
+
+/* =========== 个人资料页 =========== */
+/* 个人资料页彩色标签背景和文本颜色日夜切换过渡 */
+.hope-c-PJLV-icSWTFQ-css span {
+  transition:
+    background-color 0.25s,
+    color 0.25s;
+}
+
+/* 个人资料页WebAuthn/对象存储背景卡片毛玻璃 */
+.hope-c-PJLV-ibNJqZU-css {
+  @include glass(var(--moe-opacity-02), 10px);
+  transition: background-color 0.25s;/* 日夜切换 */
+}
+
+/* 个人资料页SSH key背景毛玻璃 */
+.hope-c-PJLV-igJUvZO-css {
+  @include glass(var(--moe-opacity-02), 10px);
+  transition: background-color 0.25s;/* 日夜切换 */
+}
+
+/* =========== 任务页 =========== */
+/* 任务列表文本颜色 */
+.hope-c-PJLV.hope-c-PJLV-ibOWCWv-css,
+.hope-c-PJLV.hope-c-PJLV-iiFYbNx-css,
+.hope-c-PJLV-ipqyVI-css p {
+  color: rgb(var(--moe-color-text));
+  transition: color 0.25s;/* 日夜切换 */
+}
+
+/* 任务列表背景毛玻璃 */
+.hope-c-PJLV-igHwkeM-css {
+  @include glass(var(--moe-opacity-02), 10px);
+  transition: background-color 0.25s;/* 日夜切换 */
+}
+
+/* =========== 用户页 =========== */
+/* 用户列表标签背景和文本颜色日夜切换过渡 */
+.hope-tbody span {
+  transition:
+    background-color 0.25s,
+    color 0.25s;
+}
+
+/* 用户权限选择框毛玻璃 兼容元信息选择框 */
+.hope-flex > .hope-form-control {
+  @include glass(var(--moe-opacity-02), 10px);
+  border-radius: var(--hope-radii-md);
+  padding: var(--hope-space-2);
+}
+
+/**
+ * 弹窗 确认删除弹窗
+ * 
+ * 边框去除
+ * 背景毛玻璃 兼容文件下载二维码背景
+*/
+
+section.hope-popover__content {
+  @include glass(var(--moe-opacity-02), 10px);
+  border-style: none;
+  div {
+    border-style: none;
+  }
+}
+
+/* =========== 存储 =========== */
+/* 标签/卡片/列表/输入框/下拉框*/
+/* 存储驱动筛选标签毛玻璃 */
+span.hope-select__tag {
+  @include background-color(var(--moe-opacity-05));
+  border-color: transparent;
+}
+
+/**
+ * 存储卡片布局
+ * 
+ * 卡片背景毛玻璃
+ * 背景颜色日夜切换和毛玻璃过渡
+ * 悬停透明
+*/
+.hope-c-PJLV-icFwTcd-css > div {
+  @include glass(var(--moe-opacity-02), 10px);
+  transition:
+    background-color 0.25s,/* 日夜切换 */
+    backdrop-filter 0.25s;
+  
+  &:hover {
+    backdrop-filter: none;
+    @include background-color(var(--moe-opacity-03));
+  }
+}
+
+/* 存储卡片切换文本颜色日夜切换过渡 */
+.hope-switch .hope-switch__label {
+  transition: color 0.25s;
+}
+
+/**
+ * 存储列表布局 兼容用户列表
+ * 
+ * 背景颜色日夜切换和毛玻璃过渡
+ * 悬停毛玻璃
+ * 修复存储列表悬停毛玻璃
+*/
+.hope-tbody tr {
+  transition:
+    background-color 0.25s,/* 日夜切换 */
+    backdrop-filter 0.25s;
+  
+  &:hover {
+    @include glass(var(--moe-opacity-02), 10px);
+    
+    td {
+      background-color: transparent !important;
+    }
+  }
+}
+/**
+ * 存储列表下拉框
+ * 
+ * 按钮毛玻璃
+ * 修复添加存储驱动输入框
+ * 按钮悬停和焦点半透明
+ * 按钮焦点阴影
+*/
+div.hope-select__trigger {
+  @include glass(var(--moe-opacity-02), 10px);
+  
+  .hope-c-PJLV-ieKzbxa-css {
+    background-color: transparent;
+    backdrop-filter: none;
+    box-shadow: none;
+  }
+  
+  &:hover,
+  &:focus {
+    @include background-color(var(--moe-opacity-05));
+  }
+  
+  &:focus,
+  &[data-focus] {
+    box-shadow: var(--moe-style-border-01);
+    border-color: rgb(var(--moe-color-border));
+  }
+}
+
+/* =========== 元信息 =========== */
+/* 大屏选择框居中 */
+@media screen and (min-width: 768px) {
+  .hope-c-PJLV-idNBdBp-css {
+    place-items: center;
+  }
+}
+
+/* 选择框文本颜色 */
+.hope-c-PJLV.hope-c-PJLV-ikGHENL-css {
+  color: var(--moe-color-info-text);
+}
+
+/* =========== 索引页 =========== */
+/* 索引计数框毛玻璃 */
+.hope-c-PJLV.hope-c-PJLV-ibzDrpK-css,
+.hope-c-PJLV.hope-c-PJLV-ijyJlsk-css {
+  @include glass(var(--moe-opacity-02), 10px);
+}
+
+/* =========== 备份页 =========== */
+/* 备份&恢复输出框毛玻璃 */
+.hope-c-PJLV.hope-c-PJLV-iddboZy-css {
+  @include glass(var(--moe-opacity-02), 10px);
+}
