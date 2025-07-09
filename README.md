@@ -66,9 +66,3 @@ div.markdown-body {
 </script>
 
 ```
-
-## 🙏 致谢
-
-[AList](https://github.com/alist-org/alist)  
-[安稳](https://anwen-anyi.github.io)  
-[kasuie](https://github.com/kasuie/alist-customize)
