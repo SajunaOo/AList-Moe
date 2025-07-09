@@ -11,59 +11,49 @@
 
 #### 🎨 多层次透明度调校 - 完美的视觉层次
 
-## 🖼️ 截图 
-![PC首页](screenshot/screenshot-1751541067136.png)
-
+## 🖼️ 截图
+![PC首页](screenshot/screenshot-1751555678689.png)
+![PC登录](screenshot/screenshot-1751544358754.png)
+![PC管理](screenshot/screenshot-1751532654257.png)
 <p align="center">
-  <img src="screenshot/screenshot-1751540216063.png" alt="首页" width="45%"/>
-  <img src="screenshot/screenshot-1751540609764.png" alt="原首页" width="45%"/>
+  <img src="screenshot/screenshot-1751536783990.png" alt="移动端首页" width="45%"/>
+  <img src="screenshot/screenshot-1751534978553.png" alt="移动端管理" width="45%"/>
 </p>
 
-<p align="center">
-  <img src="screenshot/screenshot-1751540344986.png" alt="音乐播放" width="45%"/>
-  <img src="screenshot/screenshot-1751540636044.png" alt="原音乐播放" width="45%"/>
-</p>
-
-<p align="center">
-  <img src="screenshot/screenshot-1751540408934.png" alt="个人资料" width="45%"/>
-  <img src="screenshot/screenshot-1751540722789.png" alt="原个人资料" width="45%"/>
-</p>
-<p align="center">
-  <img src="screenshot/screenshot-1751540323552.png" alt="登录页" width="45%"/>
-  <img src="screenshot/screenshot-1751540686361.png" alt="原登录页" width="45%"/>
-</p>
-
-## 🚀 使用  
+## 🚀 使用
 
 ### 自定义头部
 ```
-<!-- 更改href和font-family以更改字体，删除本link或留空href则使用AList默认字体 -->
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@500&display=swap" rel="stylesheet">
-<link href="https://gcore.jsdelivr.net/gh/SajunaOo/AList-Moe@v1.13-beta.5/css/AList-Moe.min.css" rel="stylesheet">
+<!-- 更改href和font-family以更改字体，删除本<link>和字体css则使用AList默认字体 -->
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@600&display=swap" rel="stylesheet">
+<link href="https://gcore.jsdelivr.net/gh/SajunaOo/AList-Moe@v1.14-beta/dist/css/AList-Moe.min.css" rel="stylesheet">
 <style>
 /** 更改url以更改背景图，删除本css或留空url将调用默认背景图 */
 :root {
-  --moe-theme-color: 248, 179, 78; /* 必填 该主题色用于修复视图切换按钮背景色 */
-  --moe-bg-image: url("https://gcore.jsdelivr.net/gh/SajunaOo/AList-Moe/img/background_light.webp"); /* 白天模式背景图 */
+  --moe-theme-color: 248, 179, 78; /** 必填 该主题色用于修复视图切换按钮背景色 */
+  --moe-bg-image: url("https://gcore.jsdelivr.net/gh/SajunaOo/AList-Moe/src/img/background_light.webp");/** 默认白天模式背景图 */
+  --moe-bg-image-small: url("https://gcore.jsdelivr.net/gh/SajunaOo/AList-Moe/src/img/background_samll_light.webp"); /** 默认白天模式小屏背景图 */
 }
 
 .hope-ui-dark {
-  --moe-bg-image: url("https://gcore.jsdelivr.net/gh/SajunaOo/AList-Moe/img/background_dark.webp"); /* 夜间模式背景图 */
+  --moe-bg-image: url("https://gcore.jsdelivr.net/gh/SajunaOo/AList-Moe/src/img/background_dark.webp");/** 默认夜间模式背景图 */
+  --moe-bg-image-small: url("https://gcore.jsdelivr.net/gh/SajunaOo/AList-Moe/src/img/background_samll_dark.webp");/** 默认夜间模式小屏背景图 */
 }
 
-* {
-  font-family: 'Noto Serif SC';
-  font-weight: 500;
-  font-style: normal;
+/** 字体 */
+body {
+  font-family: 'Noto Serif SC' !important;
 }
-
+div.markdown-body {
+  font-family: inherit;
+}
 </style>
 ```
 
 ### 自定义内容
 
 ```
-<script src="https://gcore.jsdelivr.net/gh/SajunaOo/AList-Moe@v1.13-beta.5/js/AList-Moe.min.js"></script>
+<script src="https://gcore.jsdelivr.net/gh/SajunaOo/AList-Moe@v1.14-beta/dist/js/AList-Moe.min.js"></script>
 
 <div id="beian-container" hidden>
   <a href="https://beian.miit.gov.cn" target="_blank" rel="noopener" class="beian-link ">
@@ -80,5 +70,5 @@
 ## 🙏 致谢
 
 [AList](https://github.com/alist-org/alist)  
-[安稳](https://anwen-anyi.github.io)   
+[安稳](https://anwen-anyi.github.io)  
 [kasuie](https://github.com/kasuie/alist-customize)
