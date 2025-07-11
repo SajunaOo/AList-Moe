@@ -1,5 +1,5 @@
 /**
- * AList Moe v1.14-beta.2 - 202507102027
+ * AList Moe v1.14-beta.3 - 202507111825
  * Repository: https://github.com/SajunaOo/AList-Moe
  * Author: 朱茱 (https://www.isajuna.com)
  * (C) 2025 朱茱 - AGPL-3.0 Licensed
@@ -52,8 +52,8 @@
   --moe-theme-color: 248, 179, 78; /** 必填 该主题色用于修复视图切换按钮背景色 */
 
   /** 背景 */
-  --moe-bg-image: url("https://gcore.jsdelivr.net/gh/SajunaOo/AList-Moe/src/img/background_light.webp");/** 默认背景图 */
-  --moe-bg-image-small: url("https://gcore.jsdelivr.net/gh/SajunaOo/AList-Moe/src/img/background_samll_light.webp"); /** 默认小屏背景图 */
+  --moe-bg-image: url("https://api.sajuna.moe/api?type=light");/** 默认背景图API */
+  --moe-bg-image-small: url("https://api.sajuna.moe/api?type=light_small");/** 默认小屏背景图API */
 }
 
 /** 夜间模式变量覆盖 */
@@ -71,8 +71,8 @@
 
   --moe-opacity-admin: .5;
 
-  --moe-bg-image: url("https://gcore.jsdelivr.net/gh/SajunaOo/AList-Moe/src/img/background_dark.webp");
-  --moe-bg-image-small: url("https://gcore.jsdelivr.net/gh/SajunaOo/AList-Moe/src/img/background_samll_dark.webp");
+  --moe-bg-image: url("https://api.sajuna.moe/api?type=dark");
+  --moe-bg-image-small: url("https://api.sajuna.moe/api?type=dark_small");
 }
 
 /** ================== 页面背景 ================== */

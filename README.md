@@ -28,16 +28,16 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@600&display=swap" rel="stylesheet">
 <link href="https://gcore.jsdelivr.net/gh/SajunaOo/AList-Moe@v1.14-beta.2/dist/css/AList-Moe.min.css" rel="stylesheet">
 <style>
-/** 更改url以更改背景图，删除本css或留空url将调用默认背景图 */
+/** 更改url以更改背景图，删除本css或留空url将调用默认背景图API */
 :root {
   --moe-theme-color: 248, 179, 78; /** 必填 该主题色用于修复视图切换按钮背景色 */
-  --moe-bg-image: url("https://gcore.jsdelivr.net/gh/SajunaOo/AList-Moe/src/img/background_light.webp");/** 默认白天模式背景图 */
-  --moe-bg-image-small: url("https://gcore.jsdelivr.net/gh/SajunaOo/AList-Moe/src/img/background_samll_light.webp"); /** 默认白天模式小屏背景图 */
+  --moe-bg-image: url("https://api.sajuna.moe/api?type=light");/** 默认白天模式背景图API */
+  --moe-bg-image-small: url("https://api.sajuna.moe/api?type=light_small");/** 默认白天模式小屏背景图API */
 }
 
 .hope-ui-dark {
-  --moe-bg-image: url("https://gcore.jsdelivr.net/gh/SajunaOo/AList-Moe/src/img/background_dark.webp");/** 默认夜间模式背景图 */
-  --moe-bg-image-small: url("https://gcore.jsdelivr.net/gh/SajunaOo/AList-Moe/src/img/background_samll_dark.webp");/** 默认夜间模式小屏背景图 */
+  --moe-bg-image: url("https://api.sajuna.moe/api?type=dark");/** 默认夜间模式背景图API */
+  --moe-bg-image-small: url("https://api.sajuna.moe/api?type=dark_small");/** 默认夜间模式小屏背景图API */
 }
 
 /** 字体 */
