@@ -30,7 +30,7 @@
 ```
 <!-- 更改href和font-family以更改字体，删除本<link>和字体css则使用AList默认字体 -->
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@600&display=swap" rel="stylesheet">
-<link href="https://gcore.jsdelivr.net/gh/SajunaOo/AList-Moe@v1.14-beta.2/dist/css/AList-Moe.min.css" rel="stylesheet">
+<link href="https://gcore.jsdelivr.net/gh/SajunaOo/AList-Moe@v1.14/dist/css/AList-Moe.min.css" rel="stylesheet">
 <style>
 /** 更改url以更改背景图，删除本css或留空url将调用默认背景图API */
 :root {
@@ -57,7 +57,7 @@ div.markdown-body {
 ### 自定义内容
 
 ```
-<script src="https://gcore.jsdelivr.net/gh/SajunaOo/AList-Moe@v1.14-beta.2/dist/js/AList-Moe.min.js"></script>
+<script src="https://gcore.jsdelivr.net/gh/SajunaOo/AList-Moe@v1.14/dist/js/AList-Moe.min.js"></script>
 
 <div id="beian-container" hidden>
   <a href="https://beian.miit.gov.cn" target="_blank" rel="noopener" class="beian-link ">
