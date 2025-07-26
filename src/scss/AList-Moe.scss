@@ -1,5 +1,5 @@
 /**
- * AList Moe v1.14-beta.3 - 202507111825
+ * AList Moe v1.14 - 202507261727
  * Repository: https://github.com/SajunaOo/AList-Moe
  * Author: 朱茱 (https://www.isajuna.com)
  * (C) 2025 朱茱 - AGPL-3.0 Licensed
@@ -52,8 +52,8 @@
   --moe-theme-color: 248, 179, 78; /** 必填 该主题色用于修复视图切换按钮背景色 */
 
   /** 背景 */
-  --moe-bg-image: url("https://api.sajuna.moe/api?type=light");/** 默认背景图API */
-  --moe-bg-image-small: url("https://api.sajuna.moe/api?type=light_small");/** 默认小屏背景图API */
+  --moe-bg-image: url("https://api.sajuna.moe/image?type=light");/** 默认背景图API */
+  --moe-bg-image-small: url("https://api.sajuna.moe/image?type=light_small");/** 默认小屏背景图API */
 }
 
 /** 夜间模式变量覆盖 */
@@ -71,8 +71,8 @@
 
   --moe-opacity-admin: .5;
 
-  --moe-bg-image: url("https://api.sajuna.moe/api?type=dark");
-  --moe-bg-image-small: url("https://api.sajuna.moe/api?type=dark_small");
+  --moe-bg-image: url("https://api.sajuna.moe/image?type=dark");
+  --moe-bg-image-small: url("https://api.sajuna.moe/image?type=dark_small");
 }
 
 /** ================== 页面背景 ================== */
@@ -289,6 +289,34 @@ div.solid-contextmenu__item:not(.solid-contextmenu__item--disabled) {
     @include background-color(var(--moe-opacity-05));
     transition: background-color 0.25s;
   }
+}
+
+/**
+ * Markdown区域表格
+ *
+ * 行背景颜色
+ * 背景毛玻璃
+*/
+.markdown-body table {
+  position: relative;
+  width: max-content !important;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    backdrop-filter: blur(10px);
+    z-index: -1;
+  }
+
+  tr {
+  background-color: rgba(var(--moe-color-main), var(--moe-opacity-05)) !important;
+  }
+
+  tr:nth-child(2n) {
+    background-color: rgba(var(--moe-color-main), .7) !important;
+  }
+
 }
 
 /**
